@@ -41,11 +41,11 @@ window.onload = function() {
     *******************************************/
     widthInputElement.onchange = function(){
         cellWidth = this.value;
-    }
+    };
 
     heightInputElement.onchange = function(){
         cellHeight= this.value;
-    }
+    };
 
 
    
@@ -72,19 +72,19 @@ window.onload = function() {
         var b = parseInt(hex.slice(5, 7), 16);
 
         return [r,g,b,alpha];
-    }
+    };
 
     /*****************************************
     * sees if two color arrays are the same  *
     ******************************************/
     var compareColors = function(color1, color2){
         for(var i=0; i<4; i++){
-            if(color1[i] != color2[i]){
+            if(color1[i] !== color2[i]){
                 return false;
             }
         }
         return true;
-    }
+    };
 
 //*******************************************************
 //*******************  ImageData   **********************
@@ -112,7 +112,7 @@ window.onload = function() {
         for(var i=0;i<color.length;i++){
             this.data[index+i] = color[i];  
         }
-    }
+    };
 
     /******************************************
     *  get the color of a pixel of the canvas *
@@ -123,7 +123,7 @@ window.onload = function() {
             color.push(this.data[index+i]);  
         }
         return color;
-    }
+    };
 
 //*******************************************************
 //*******************   Mouse   *************************
@@ -152,7 +152,7 @@ window.onload = function() {
         position.x = Math.floor(position.x/cellWidth)*cellWidth;
         position.y = Math.floor(position.y/cellHeight)*cellHeight;
         return position;
-    }
+    };
 
 //*******************************************************
 //******************   The App   ************************
@@ -188,7 +188,7 @@ window.onload = function() {
         var normalColor = hexToRGB(document.getElementById('color').value);
         var cellColor = imageData.getColor(getIndex(mousePos.x, mousePos.y));
         paintColor = compareColors(normalColor, cellColor) ? defaultColor : normalColor;
-    }
+    };
 
 
     /*********************************************************************
@@ -199,7 +199,7 @@ window.onload = function() {
         var mousePos = roundUpMousePosition(getMousePosition(event));
         evaluateProperColor(mousePos,imageData);
         context.putImageData(colorCell(mousePos, imageData, paintColor), 0, 0);       
-    }
+    };
 
 
     /**************************************************************************
@@ -208,11 +208,11 @@ window.onload = function() {
     var onMouseMoveEvent = function(event){
         var imageData = context.getImageData(0,0,canvas.offsetWidth,canvas.offsetHeight);
         var mousePos = roundUpMousePosition(getMousePosition(event));
-        if(event.buttons != 0){
+        if(event.buttons !== 0){
             context.putImageData(colorCell(mousePos, imageData, paintColor), 0, 0);
         }
 
-    }
+    };
 
 
     /***************************************************************
