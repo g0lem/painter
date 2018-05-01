@@ -7,9 +7,25 @@ window.onload = function() {
     const defaultColor = [255,255,255,255]; //white, since you delete it with white
     var paintColor;                         //current brush color
 
-    //getting the height and width of our cells
-    var cellWidth = 60;
-    var cellHeight = 60;
+
+    //declaring the elements for further use
+    var widthInputElement = document.getElementById('width');
+    var heightInputElement = document.getElementById('height');
+
+    //setting the default values of the cells
+    var cellWidth = widthInputElement.value;
+    var cellHeight = heightInputElement.value;
+
+
+    //update the cells if values change
+    widthInputElement.onchange = function(){
+        cellWidth = this.value;
+    }
+
+    heightInputElement.onchange = function(){
+        cellHeight= this.value;
+    }
+
 
     //converts a hex color string into a rgba array
     var hexToRGB = function(hex, alpha=255) {
@@ -29,7 +45,6 @@ window.onload = function() {
         }
         return true;
     }
-
 
     //colors a pixel on the canvas
     ImageData.prototype.colorPixel = function(color, index = 0){
@@ -104,11 +119,9 @@ window.onload = function() {
 
     }
 
-
     canvas.addEventListener('mousemove', onMouseMoveEvent);
 
     canvas.addEventListener('mousedown', onMouseDownEvent);
-
 
 /*    var drawBackUp = function(event){
         var mousePos = roundUpMousePosition(getMousePosition(event));
