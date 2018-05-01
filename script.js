@@ -4,11 +4,12 @@ window.onload = function() {
     var canvas = document.getElementById('mainCanvas');
     var context = canvas.getContext('2d');
 
-    //it's supposed not to have anti aliasing, so it won't look terrible
-    context.imageSmoothingEnabled = false;
+    const defaultColor = [255,255,255,255]; //white, since you delete it with white
+    var paintColor;                         //current brush color
 
+    //getting the height and width of our cells
     var cellWidth = 60;
-    var cellHeight = 30;
+    var cellHeight = 60;
 
     //converts a hex color string into a rgba array
     var hexToRGB = function(hex, alpha=255) {
@@ -19,11 +20,41 @@ window.onload = function() {
         return [r,g,b,alpha];
     }
 
-    //colors a pixel on the canvas
-    ImageData.prototype.colorPixel = function(color=[0,0,0,255], index = 0){
-        for(var i=0;i<color.length;i++){
-            this.data[index+i] = color[i];
+    //sees if two color arrays are alike
+    var compareColors = function(color1, color2){
+        for(var i=0; i<4; i++){
+            if(color1[i] != color2[i]){
+                return false;
+            }
         }
+        return true;
+    }
+
+
+    //colors a pixel on the canvas
+    ImageData.prototype.colorPixel = function(color, index = 0){
+        for(var i=0;i<color.length;i++){
+            this.data[index+i] = color[i];  
+        }
+    }
+
+    //get the color of a pixel of the canvas
+    ImageData.prototype.getColor = function(index = 0){
+        var color = [];
+        for(var i=0;i<4;i++){
+            color.push(this.data[index+i]);  
+        }
+        return color;
+    }
+
+
+    var colorCell = function(position, imageData, color){
+        for(var i=0; i<cellHeight; i++){
+            for(var j=0; j<cellWidth; j++){
+                imageData.colorPixel(color, getIndex(position.x + j, position.y + i));
+            }
+        }
+        return imageData;
     }
 
     //converts (x,y) coordonates into an index, since the data is an array
@@ -40,52 +71,54 @@ window.onload = function() {
         };
     };
 
-
+    // this rounds up the mouse coords to reflect the cell clicked
     var roundUpMousePosition = function(position){
         position.x = Math.floor(position.x/cellWidth)*cellWidth;
         position.y = Math.floor(position.y/cellHeight)*cellHeight;
         return position;
     }
 
-    var colorCell = function(position, imageData){
-        var color = hexToRGB(document.getElementById('color').value);
-        for(var i=0; i<=cellHeight; i++){
-            for(var j=0; j<=cellWidth; j++){
-                imageData.colorPixel(color, getIndex(position.x + j, position.y + i));
-            }
-        }
-        return imageData;
+    var evaluateProperColor = function(mousePos, imageData){
+        var normalColor = hexToRGB(document.getElementById('color').value);
+        var cellColor = imageData.getColor(getIndex(mousePos.x, mousePos.y));
+        paintColor = compareColors(normalColor, cellColor) ? defaultColor : normalColor;
     }
 
-    //updates the canvas
-    var draw = function(event){
-        var mousePos = roundUpMousePosition(getMousePosition(event));
+
+    //this handles the color picking process and fills the current cell
+    var onMouseDownEvent = function(event){
         var imageData = context.getImageData(0,0,canvas.offsetWidth,canvas.offsetHeight);
-        var color = hexToRGB(document.getElementById('color').value);
-        //imageData.colorPixel(color);
-        context.putImageData(colorCell(mousePos, imageData), 0, 0);
+        var mousePos = roundUpMousePosition(getMousePosition(event));
+        evaluateProperColor(mousePos,imageData);
+        context.putImageData(colorCell(mousePos, imageData, paintColor), 0, 0);       
     }
 
-    var drawBackUp = function(event){
+
+    //this handles mouse movement and the coloring of the cells you run over
+    var onMouseMoveEvent = function(event){
+        var imageData = context.getImageData(0,0,canvas.offsetWidth,canvas.offsetHeight);
+        var mousePos = roundUpMousePosition(getMousePosition(event));
+        if(event.buttons != 0){
+            context.putImageData(colorCell(mousePos, imageData, paintColor), 0, 0);
+        }
+
+    }
+
+
+    canvas.addEventListener('mousemove', onMouseMoveEvent);
+
+    canvas.addEventListener('mousedown', onMouseDownEvent);
+
+
+/*    var drawBackUp = function(event){
         var mousePos = roundUpMousePosition(getMousePosition(event));
         var imageData = context.getImageData(mousePos.x,mousePos.y,mousePos.x+cellWidth,mousePos.y+cellHeight);
         var color = hexToRGB(document.getElementById('color').value);
         //imageData.colorPixel(color);
         context.putImageData(colorCell(mousePos, imageData), mousePos.x, mousePos.y);
-    }
+    }*/
 
-
-
-    canvas.addEventListener('mousemove', function (event) {
-        //if a mouse button is clicked
-        if(event.buttons != 0){
-            draw(event);
-        }
-    });
-
-    canvas.addEventListener('click', draw);
-
-    (function(){
+/*    (function(){
         var canvasSize = canvas.offsetWidth;
         var numberOfBoxes= 10;
         drawing = new Image() 
@@ -100,6 +133,6 @@ window.onload = function() {
                 context.stroke();
             }
         }
-    })();
+    })();*/
 
 };
