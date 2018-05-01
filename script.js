@@ -1,15 +1,19 @@
+//load the script in the <head> tag, but only load it after everything on the page has rendered
 window.onload = function() {
 
     var canvas = document.getElementById('mainCanvas');
     var context = canvas.getContext('2d');
     var color = document.getElementById('color').value;
+
+    //it's supposed not to have anti aliasing, so it won't look terrible
+    context.imageSmoothingEnabled = false;
     console.log(color);
 
-    var cellWidth = 10;
-    var cellHeight = 10;
+    var cellWidth = 60;
+    var cellHeight = 60;
 
     //converts a hex color string into a rgba array
-    function hexToRGB(hex, alpha=255) {
+    var hexToRGB = function(hex, alpha=255) {
         var r = parseInt(hex.slice(1, 3), 16);
         var g = parseInt(hex.slice(3, 5), 16);
         var b = parseInt(hex.slice(5, 7), 16);
@@ -25,8 +29,8 @@ window.onload = function() {
     }
 
     //converts (x,y) coordonates into an index, since the data is an array
-    var getIndex = function({x,y}){
-        return 4 * (x + y * 800);
+    var getIndex = function(x,y){
+        return 4 * (x + y * canvas.offsetHeight);
     };
 
     //gets mouse (x,y) coordonates in the canvas
@@ -39,28 +43,39 @@ window.onload = function() {
     };
 
 
-    var processMousePosition = function(obj){
-
-
+    var roundUpMousePosition = function(position){
+        position.x = Math.floor(position.x/cellWidth)*cellWidth;
+        position.y = Math.floor(position.y/cellHeight)*cellHeight;
+        return position;
     }
 
-    var colorCell = function(obj){
-
-        
-
+    var colorCell = function(position, imageData){
+        var color = hexToRGB(document.getElementById('color').value);
+        for(var i=0; i<=cellHeight; i++){
+            for(var j=0; j<=cellWidth; j++){
+                imageData.colorPixel(color, getIndex(position.x + j, position.y + i));
+            }
+        }
+        return imageData;
     }
 
     //updates the canvas
     var draw = function(event){
-
-        var mousePos = getMousePosition(event);
-        var imageData = context.getImageData(mousePos.x,mousePos.y,mousePos.x+1,mousePos.y+1);
-        var index = getIndex(mousePos);
+        var mousePos = roundUpMousePosition(getMousePosition(event));
+        var imageData = context.getImageData(0,0,canvas.offsetWidth,canvas.offsetHeight);
         var color = hexToRGB(document.getElementById('color').value);
-
-        imageData.colorPixel(color);
-        context.putImageData(imageData, mousePos.x, mousePos.y);
+        //imageData.colorPixel(color);
+        context.putImageData(colorCell(mousePos, imageData), 0, 0);
     }
+
+    var drawBackUp = function(event){
+        var mousePos = roundUpMousePosition(getMousePosition(event));
+        var imageData = context.getImageData(mousePos.x,mousePos.y,mousePos.x+cellWidth,mousePos.y+cellHeight);
+        var color = hexToRGB(document.getElementById('color').value);
+        //imageData.colorPixel(color);
+        context.putImageData(colorCell(mousePos, imageData), mousePos.x, mousePos.y);
+    }
+
 
 
     canvas.addEventListener('mousemove', function (event) {
@@ -75,16 +90,12 @@ window.onload = function() {
     (function(){
         var canvasSize = canvas.offsetWidth;
         var numberOfBoxes= 10;
-        var boxSize = {
-            x: 60,
-            y: 60
-        };
-        for(var i = 0; i<numberOfBoxes; i++){
-            for(var j = 0; j<numberOfBoxes; j++){
+        for(var i = 0; i<canvas.offsetHeight/cellHeight; i++){
+            for(var j = 0; j<canvas.offsetWidth/cellWidth; j++){
                 context.beginPath();
                 context.lineWidth=1;
                 context.strokeStyle="black";
-                context.rect(i*boxSize.y,j*boxSize.x,(i+1)*boxSize.y,(j+1)*boxSize.x);
+                context.rect(i*cellHeight,j*cellWidth,(i+1)*cellHeight,(j+1)*cellWidth);
                 context.stroke();
             }
         }
