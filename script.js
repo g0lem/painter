@@ -3,14 +3,12 @@ window.onload = function() {
 
     var canvas = document.getElementById('mainCanvas');
     var context = canvas.getContext('2d');
-    var color = document.getElementById('color').value;
 
     //it's supposed not to have anti aliasing, so it won't look terrible
     context.imageSmoothingEnabled = false;
-    console.log(color);
 
     var cellWidth = 60;
-    var cellHeight = 60;
+    var cellHeight = 30;
 
     //converts a hex color string into a rgba array
     var hexToRGB = function(hex, alpha=255) {
@@ -90,12 +88,15 @@ window.onload = function() {
     (function(){
         var canvasSize = canvas.offsetWidth;
         var numberOfBoxes= 10;
+        drawing = new Image() 
+        drawing.src = "draw.png" 
+        context.drawImage(drawing,0,0);
         for(var i = 0; i<canvas.offsetHeight/cellHeight; i++){
             for(var j = 0; j<canvas.offsetWidth/cellWidth; j++){
                 context.beginPath();
                 context.lineWidth=1;
                 context.strokeStyle="black";
-                context.rect(i*cellHeight,j*cellWidth,(i+1)*cellHeight,(j+1)*cellWidth);
+                context.rect(j*cellWidth,i*cellHeight,(j+1)*cellWidth,(i+1)*cellHeight);
                 context.stroke();
             }
         }
