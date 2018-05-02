@@ -168,7 +168,9 @@ window.onload = function () {
     var colorCell = function (position, imageData, color) {
         for (var i = 0; i < cellHeight; i++) {
             for (var j = 0; j < cellWidth; j++) {
-                imageData.colorPixel(color, getIndex(position.x + j, position.y + i));
+                if(position.x + j < canvas.offsetWidth && position.y + i < canvas.offsetHeight){
+                    imageData.colorPixel(color, getIndex(position.x + j, position.y + i));
+                }
             }
         }
         return imageData;
