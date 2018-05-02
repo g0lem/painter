@@ -85,6 +85,8 @@ html, body {
 
 .contentWrapper{
 	margin-top: 2%;
+	position: relative;
+	display: inline-block;
 }
 
 .codeLink{
