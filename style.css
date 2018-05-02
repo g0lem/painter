@@ -24,9 +24,10 @@ html, body {
 
 .tools{
 	display: inline-block;
-	position: relative;
-	padding-left: 10%;
-	padding-top: 2%;
+	position: absolute;
+	padding-left:  12%;
+	padding-top: 10%;
+	float: right;
 };
 
 .field{
@@ -40,8 +41,6 @@ html, body {
 	position: relative;
 	display: inline-block;
 	padding-left: 5%;
-    bottom: 0;
-    right: 0;
 }
 
 .banner{

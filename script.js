@@ -167,12 +167,12 @@ window.onload = function () {
     /******************************
      *  this colors an entire cell *
      *******************************/
-    var colorCell = function (position, imageData, color) {
+    var colorCell = function (position, imageData) {
         for (var i = 0; i < cellHeight; i++) {
             for (var j = 0; j < cellWidth; j++) {
                 //check if you are not out of bounds, otherwise you will color some pixels you shouldn't
                 if(position.x + j < canvas.offsetWidth && position.y + i < canvas.offsetHeight){
-                    imageData.colorPixel(color, getIndex(position.x + j, position.y + i));
+                    imageData.colorPixel(paintColor, getIndex(position.x + j, position.y + i));
                 }
             }
         }
@@ -183,7 +183,7 @@ window.onload = function () {
      *  converts (x,y) coordonates into an index, since the data is an array *
      *************************************************************************/
     var getIndex = function (x, y) {
-        return 4 * (x + y * canvas.offsetHeight);
+        return 4 * (x + y * canvas.offsetWidth);
     };
 
 
@@ -201,7 +201,7 @@ window.onload = function () {
         var imageData = context.getImageData(0, 0, canvas.offsetWidth, canvas.offsetHeight);
         var mousePos = roundUpMousePosition(getMousePosition(event));
         evaluateProperColor(mousePos, imageData);
-        context.putImageData(colorCell(mousePos, imageData, paintColor), 0, 0);
+        context.putImageData(colorCell(mousePos, imageData), 0, 0);
     };
 
 
@@ -212,7 +212,7 @@ window.onload = function () {
         var imageData = context.getImageData(0, 0, canvas.offsetWidth, canvas.offsetHeight);
         var mousePos = roundUpMousePosition(getMousePosition(event));
         if (event.buttons !== 0) {
-            context.putImageData(colorCell(mousePos, imageData, paintColor), 0, 0);
+            context.putImageData(colorCell(mousePos, imageData), 0, 0);
         }
 
     };
