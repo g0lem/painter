@@ -7,12 +7,26 @@
         <script src="script.js"></script>
     </head>
     <body>
-	    <canvas id="mainCanvas" width="600" height="600" style="width: 600px; height: 600px; border:1px solid #000000; background-color: transparent;"></canvas>
-    	<div>
-    		Cell dimensions :
-	        <input id="width" type="text" name="" value="10">
-	        <input id="height" type="text" name="" value="10">
-	        <input id="color" type="color" name="">
+
+        <div><div class="border-menu"></div>
+        <div class="banner" align="center">Painter</div> 
+        <div class="" align="center"><i>design your pixelated dream</i></div>
+        <div class="border-menu"></div></div>
+
+        <div class="contentWrapper">
+    	    <canvas id="mainCanvas" width="650" height="650" style="border:1px solid #000000; background-color: transparent;" class="canvas"></canvas>
+        	<div class="tools">
+        		<u><b>Brush</b></u>:
+    	        <div>width: <input id="width" type="text" name="" value="10" class="field"</div>
+    	        <div>height:<input id="height" type="text" name="" value="10" class="field"></div>
+    	        <div>color:<input id="color" type="color" name="" class="field"></div>
+                <hr>
+                <div><u><b>Tips</b></u>:</div>
+                <div>Select the brush size using the width and height fields</div>
+                <div>Select the color using the color picker</div>
+                <div>Click or drag your mouse on the window to your left to start drawing</div>
+                <div>If you click on a field of the same color as the one in your brush, it's going to turn white</div>
+            </div>
         </div>
     </body>
 </html>

@@ -1,0 +1,47 @@
+.canvas{
+	margin-left: 10%;
+}
+
+.tools{
+	display: inline-block;
+	position: fixed;
+	margin-left: 10%;
+	margin-top: 2%;
+};
+
+.field{
+	float: right;
+	text-align: right;
+
+}
+
+.tips{
+	position: relative;
+}
+
+.banner{
+	width: 100%;
+	display: block;
+	font-size: 3em;
+	margin-bottom: 0.25%;
+}
+
+.border-menu {
+  position: relative;
+}
+.border-menu:before {
+  content: "";
+  display: inline-block;
+  position: relative;
+  top: 0.25em;
+  left: 0;
+  width: 100%;
+  height: 0.125em;
+  border-top: 0.375em double #000;
+  border-bottom: 0.125em solid #000;
+  margin-bottom: 0.5%;
+}
+
+.contentWrapper{
+	margin-top: 2%;
+}
