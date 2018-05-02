@@ -20,11 +20,7 @@ input{
 }
 
 
-.canvas{
-	margin-left: 10%;
-	margin-top: 6%;
-	outline: 2px solid black;
-}
+
 
 .screen{
 	min-height: 100%;
@@ -33,6 +29,29 @@ input{
 	height: 100%;
 	position: relative;
 	display: block;
+}
+
+.banner{
+	width: 100%;
+	position: relative;
+	padding-top: 18%;
+	display: block;
+	font-size: 10em;
+	padding-bottom: 0.25%;
+	color: #FFF;
+}
+
+.mainStyle{
+	background: #355C7D;
+	color: #FFFFFF;
+	font-family: "mainFont";
+	letter-spacing: 2px;
+}
+
+.canvas{
+	margin-left: 10%;
+	margin-top: 6%;
+	outline: 2px solid black;
 }
 
 .tools{
@@ -56,15 +75,6 @@ input{
 	padding-left: 5%;
 }
 
-.banner{
-	width: 100%;
-	position: relative;
-	padding-top: 18%;
-	display: block;
-	font-size: 10em;
-	padding-bottom: 0.25%;
-	color: #FFF;
-}
 
 .colorCloud{
 	background-color: #ecf0f1;
@@ -116,12 +126,6 @@ input{
 	color: #2c3e50;
 }
 
-.mainStyle{
-	background: #355C7D;
-	color: #FFFFFF;
-	font-family: "mainFont";
-	letter-spacing: 2px;
-}
 
 .colorPallet{
 	display: inline-block;
