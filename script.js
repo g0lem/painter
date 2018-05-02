@@ -239,5 +239,9 @@ window.onload = function () {
     canvas.addEventListener('mousemove', onMouseMoveEvent);
     canvas.addEventListener('mousedown', onMouseDownEvent);
 
+    document.getElementById('clear').addEventListener('click', function(){
+        var emptyImageData = new ImageData(canvas.offsetWidth, canvas.offsetHeight);
+        context.putImageData(emptyImageData, 0, 0);
+    });
 
 };
