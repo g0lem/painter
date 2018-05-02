@@ -3,18 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <title>Painter</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="style.css">
         <script src="script.js"></script>
     </head>
     <body>
-
-        <div><div class="lineOrnament"></div>
-        <div class="banner" align="center">Painter</div> 
-        <div class="" align="center"><i>design your pixelated dream</i></div>
-        <div class="lineOrnament"></div></div>
-
-        <div class="contentWrapper">
-    	    <canvas id="mainCanvas" width="650" height="650" style="border:1px solid #000000; background-color: transparent;" class="canvas"></canvas>
+        <div class="screen colorWhite">
+            <div class="banner" align="center">
+                 PAINTER
+                <div class="colorPallet">
+                    <div class="nothingDiv">
+                        <i class="dot colorRed"><i class="dot colorYellow"></i></i> 
+                    </div>
+                    <div class="nothingDiv">
+                        <i class="dot colorBlue"><i class="dot colorGreen"></i></i> 
+                    </div>                
+                </div>
+            </div>
+            <i class="fa fa-angle-double-down arrowDown" align="center"></i>
+        </div> 
+        <div class="screen contentWrapper">
+    	    <canvas id="mainCanvas" width="650" height="650" style="border:1px solid #000000; background-color: white;" class="canvas"></canvas>
         	<div class="tools">
         		<u><b>Brush</b></u>:
     	        <div class="field">Brush Width: <input id="width" type="text" name="" value="10" class="field"></div>
