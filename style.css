@@ -7,16 +7,22 @@
 	position: fixed;
 	margin-left: 10%;
 	margin-top: 2%;
+	height: 100%;
 };
 
 .field{
 	float: right;
 	text-align: right;
-
+	display: inline-block;
+	position: relative;
 }
 
 .tips{
 	position: relative;
+	display: inline-block;
+	margin-left: 5%;
+    bottom: 0;
+    right: 0;
 }
 
 .banner{
@@ -29,6 +35,7 @@
 .lineOrnament {
   position: relative;
 }
+
 .lineOrnament:before {
   content: "";
   display: inline-block;
@@ -44,4 +51,10 @@
 
 .contentWrapper{
 	margin-top: 2%;
+}
+
+.codeLink{
+	width: 40%;
+	height: 40%;
+	margin-left: 40%
 }
