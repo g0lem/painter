@@ -1,6 +1,6 @@
 @font-face {
     font-family: "mainFont";
-    src: url(fonts/coolvetica.ttf) format('truetype');
+    src: url(fonts/coolvetica.otf);
     font-weight: normal;
     font-style: normal;
 }
@@ -46,10 +46,12 @@ html, body {
 
 .banner{
 	width: 100%;
-	margin-top: 18%;
+	position: relative;
+	padding-top: 18%;
 	display: block;
 	font-size: 10em;
 	margin-bottom: 0.25%;
+	color: #FFF;
 }
 
 .colorCloud{
@@ -81,6 +83,10 @@ html, body {
 
 .colorWhite{
 	background-color: #FFF;
+}
+
+.colorDarkBlue{
+	background-color: #2c3e50;
 }
 
 .contentWrapper{
