@@ -29,7 +29,8 @@ window.onload = function () {
      ********************************************/
     var widthInputElement = document.getElementById('width');
     var heightInputElement = document.getElementById('height');
-
+    var widthSliderInputElement = document.getElementById('widthSlider');
+    var heightSliderInputElement = document.getElementById('heightSlider');
 
     /******************************************
      * setting the default values of the cells *
@@ -43,11 +44,25 @@ window.onload = function () {
      *******************************************/
     widthInputElement.onchange = function () {
         cellWidth = this.value;
+        widthSliderInputElement.value = this.value;
     };
 
     heightInputElement.onchange = function () {
         cellHeight = this.value;
+        heightSliderInputElement.value = this.value;
     };
+
+
+    widthSliderInputElement.onchange = function () {
+        cellWidth = this.value;
+        widthInputElement.value = this.value;
+    };
+
+    heightSliderInputElement.onchange = function () {
+        cellHeight = this.value;
+        heightInputElement.value = this.value;
+    };
+
 
 
 //*******************************************************
