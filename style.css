@@ -26,10 +26,10 @@
 	margin-bottom: 0.25%;
 }
 
-.border-menu {
+.lineOrnament {
   position: relative;
 }
-.border-menu:before {
+.lineOrnament:before {
   content: "";
   display: inline-block;
   position: relative;

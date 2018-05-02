@@ -168,6 +168,7 @@ window.onload = function () {
     var colorCell = function (position, imageData, color) {
         for (var i = 0; i < cellHeight; i++) {
             for (var j = 0; j < cellWidth; j++) {
+                //check if you are not out of bounds, otherwise you will color some pixels you shouldn't
                 if(position.x + j < canvas.offsetWidth && position.y + i < canvas.offsetHeight){
                     imageData.colorPixel(color, getIndex(position.x + j, position.y + i));
                 }
