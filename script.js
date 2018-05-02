@@ -13,13 +13,15 @@ window.onload = function () {
     var context = canvas.getContext('2d');
 
 
-                                               //*********************************************
-    const defaultColor = [255, 255, 255, 255]; //*** white, since you delete it with white ***
-                                               //*********************************************
+    //*********************************************
+    //*** white, since you delete it with white ***
+    //*********************************************
+    const defaultColor = [255, 255, 255, 255];
 
-                                            //***************************
-    var paintColor;                         //*** current brush color ***
-                                            //***************************
+    //***************************
+    //*** current brush color ***
+    //***************************
+    var paintColor;
 
 
     /*******************************************
@@ -221,5 +223,6 @@ window.onload = function () {
      ****************************************************************/
     canvas.addEventListener('mousemove', onMouseMoveEvent);
     canvas.addEventListener('mousedown', onMouseDownEvent);
+
 
 };
