@@ -1,6 +1,8 @@
 Painter
+
 Write a piece of code that receives 2 numbers - width & height and creates a drawing area of 
 width by height cells. Each cell can be clicked and that will change its color. Another click on the same cell will change it back to white.
+
 
 Bonus:
 Color picker
